@@ -1,0 +1,224 @@
+FEATURE OUT:
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_______________________ test_mutex_single_option_passes ________________________
+
+    def test_mutex_single_option_passes():
+        runner = CliRunner()
+    
+        @click.command()
+        @click.option("--dry-run", is_flag=True, mutually_exclusive=["execute"])
+>       @click.option("--execute", is_flag=True, mutually_exclusive=["dry_run"])
+
+tests/test_feature.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../click/src/click/decorators.py:365: in decorator
+    _param_memo(f, cls(param_decls, **attrs))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'Option' object has no attribute 'name'") raised in repr()] Option object at 0x7739efef6960>
+param_decls = ('--execute',), show_default = None, prompt = False
+confirmation_prompt = False, prompt_required = True, hide_input = False
+is_flag = True, flag_value = None, multiple = False, count = False
+allow_from_autoenv = True, type = None, help = None, hidden = False
+show_choices = True, show_envvar = False
+attrs = {'mutually_exclusive': ['dry_run']}, default_is_missing = True
+
+    def __init__(
+        self,
+        param_decls: t.Optional[t.Sequence[str]] = None,
+        show_default: t.Union[bool, str, None] = None,
+        prompt: t.Union[bool, str] = False,
+        confirmation_prompt: t.Union[bool, str] = False,
+        prompt_required: bool = True,
+        hide_input: bool = False,
+        is_flag: t.Optional[bool] = None,
+        flag_value: t.Optional[t.Any] = None,
+        multiple: bool = False,
+        count: bool = False,
+        allow_from_autoenv: bool = True,
+        type: t.Optional[t.Union[types.ParamType, t.Any]] = None,
+        help: t.Optional[str] = None,
+        hidden: bool = False,
+        show_choices: bool = True,
+        show_envvar: bool = False,
+        **attrs: t.Any,
+    ) -> None:
+        if help:
+            help = inspect.cleandoc(help)
+    
+        default_is_missing = "default" not in attrs
+>       super().__init__(param_decls, type=type, multiple=multiple, **attrs)
+E       TypeError: Parameter.__init__() got an unexpected keyword argument 'mutually_exclusive'
+
+../click/src/click/core.py:2539: TypeError
+____________________ test_mutex_conflict_raises_usage_error ____________________
+
+    def test_mutex_conflict_raises_usage_error():
+        runner = CliRunner()
+    
+        @click.command()
+        @click.option("--dry-run", is_flag=True, mutually_exclusive=["execute"])
+>       @click.option("--execute", is_flag=True, mutually_exclusive=["dry_run"])
+
+tests/test_feature.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../click/src/click/decorators.py:365: in decorator
+    _param_memo(f, cls(param_decls, **attrs))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'Option' object has no attribute 'name'") raised in repr()] Option object at 0x7739efef78f0>
+param_decls = ('--execute',), show_default = None, prompt = False
+confirmation_prompt = False, prompt_required = True, hide_input = False
+is_flag = True, flag_value = None, multiple = False, count = False
+allow_from_autoenv = True, type = None, help = None, hidden = False
+show_choices = True, show_envvar = False
+attrs = {'mutually_exclusive': ['dry_run']}, default_is_missing = True
+
+    def __init__(
+        self,
+        param_decls: t.Optional[t.Sequence[str]] = None,
+        show_default: t.Union[bool, str, None] = None,
+        prompt: t.Union[bool, str] = False,
+        confirmation_prompt: t.Union[bool, str] = False,
+        prompt_required: bool = True,
+        hide_input: bool = False,
+        is_flag: t.Optional[bool] = None,
+        flag_value: t.Optional[t.Any] = None,
+        multiple: bool = False,
+        count: bool = False,
+        allow_from_autoenv: bool = True,
+        type: t.Optional[t.Union[types.ParamType, t.Any]] = None,
+        help: t.Optional[str] = None,
+        hidden: bool = False,
+        show_choices: bool = True,
+        show_envvar: bool = False,
+        **attrs: t.Any,
+    ) -> None:
+        if help:
+            help = inspect.cleandoc(help)
+    
+        default_is_missing = "default" not in attrs
+>       super().__init__(param_decls, type=type, multiple=multiple, **attrs)
+E       TypeError: Parameter.__init__() got an unexpected keyword argument 'mutually_exclusive'
+
+../click/src/click/core.py:2539: TypeError
+_____________________ test_mutex_defaults_do_not_conflict ______________________
+
+    def test_mutex_defaults_do_not_conflict():
+        runner = CliRunner()
+    
+        @click.command()
+        @click.option("--mode-a", default="default_a", mutually_exclusive=["mode_b"])
+>       @click.option("--mode-b", default="default_b", mutually_exclusive=["mode_a"])
+
+tests/test_feature.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../click/src/click/decorators.py:365: in decorator
+    _param_memo(f, cls(param_decls, **attrs))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'Option' object has no attribute 'name'") raised in repr()] Option object at 0x7739efef4ec0>
+param_decls = ('--mode-b',), show_default = None, prompt = False
+confirmation_prompt = False, prompt_required = True, hide_input = False
+is_flag = None, flag_value = None, multiple = False, count = False
+allow_from_autoenv = True, type = None, help = None, hidden = False
+show_choices = True, show_envvar = False
+attrs = {'default': 'default_b', 'mutually_exclusive': ['mode_a']}
+default_is_missing = False
+
+    def __init__(
+        self,
+        param_decls: t.Optional[t.Sequence[str]] = None,
+        show_default: t.Union[bool, str, None] = None,
+        prompt: t.Union[bool, str] = False,
+        confirmation_prompt: t.Union[bool, str] = False,
+        prompt_required: bool = True,
+        hide_input: bool = False,
+        is_flag: t.Optional[bool] = None,
+        flag_value: t.Optional[t.Any] = None,
+        multiple: bool = False,
+        count: bool = False,
+        allow_from_autoenv: bool = True,
+        type: t.Optional[t.Union[types.ParamType, t.Any]] = None,
+        help: t.Optional[str] = None,
+        hidden: bool = False,
+        show_choices: bool = True,
+        show_envvar: bool = False,
+        **attrs: t.Any,
+    ) -> None:
+        if help:
+            help = inspect.cleandoc(help)
+    
+        default_is_missing = "default" not in attrs
+>       super().__init__(param_decls, type=type, multiple=multiple, **attrs)
+E       TypeError: Parameter.__init__() got an unexpected keyword argument 'mutually_exclusive'
+
+../click/src/click/core.py:2539: TypeError
+________________________ test_mutex_order_independence _________________________
+
+    def test_mutex_order_independence():
+        runner = CliRunner()
+    
+        @click.command()
+        @click.option("--format-json", is_flag=True, mutually_exclusive=["format_yaml"])
+>       @click.option("--format-yaml", is_flag=True, mutually_exclusive=["format_json"])
+
+tests/test_feature.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../click/src/click/decorators.py:365: in decorator
+    _param_memo(f, cls(param_decls, **attrs))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'Option' object has no attribute 'name'") raised in repr()] Option object at 0x7739eff38ad0>
+param_decls = ('--format-yaml',), show_default = None, prompt = False
+confirmation_prompt = False, prompt_required = True, hide_input = False
+is_flag = True, flag_value = None, multiple = False, count = False
+allow_from_autoenv = True, type = None, help = None, hidden = False
+show_choices = True, show_envvar = False
+attrs = {'mutually_exclusive': ['format_json']}, default_is_missing = True
+
+    def __init__(
+        self,
+        param_decls: t.Optional[t.Sequence[str]] = None,
+        show_default: t.Union[bool, str, None] = None,
+        prompt: t.Union[bool, str] = False,
+        confirmation_prompt: t.Union[bool, str] = False,
+        prompt_required: bool = True,
+        hide_input: bool = False,
+        is_flag: t.Optional[bool] = None,
+        flag_value: t.Optional[t.Any] = None,
+        multiple: bool = False,
+        count: bool = False,
+        allow_from_autoenv: bool = True,
+        type: t.Optional[t.Union[types.ParamType, t.Any]] = None,
+        help: t.Optional[str] = None,
+        hidden: bool = False,
+        show_choices: bool = True,
+        show_envvar: bool = False,
+        **attrs: t.Any,
+    ) -> None:
+        if help:
+            help = inspect.cleandoc(help)
+    
+        default_is_missing = "default" not in attrs
+>       super().__init__(param_decls, type=type, multiple=multiple, **attrs)
+E       TypeError: Parameter.__init__() got an unexpected keyword argument 'mutually_exclusive'
+
+../click/src/click/core.py:2539: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_feature.py::test_mutex_single_option_passes - TypeError: Pa...
+FAILED tests/test_feature.py::test_mutex_conflict_raises_usage_error - TypeEr...
+FAILED tests/test_feature.py::test_mutex_defaults_do_not_conflict - TypeError...
+FAILED tests/test_feature.py::test_mutex_order_independence - TypeError: Para...
+4 failed in 0.22s
+
+
+
+REGRESSION OUT:
+........................................................................ [ 42%]
+........................................................................ [ 85%]
+.........................                                                [100%]
+169 passed in 0.48s
+
+

@@ -1,0 +1,8 @@
+.venv/
+.cache/
+__pycache__/
+*.pyc
+.env
+*.key
+logs/llm_calls.jsonl
+*.tar.gz

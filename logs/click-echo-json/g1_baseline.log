@@ -1,0 +1,107 @@
+FEATURE OUT:
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+_____________________________ test_echo_json_basic _____________________________
+
+    def test_echo_json_basic():
+        runner = CliRunner()
+    
+        @click.command()
+        def cli():
+            click.echo_json({"status": "ok", "code": 200})
+    
+        res = runner.invoke(cli)
+>       assert res.exit_code == 0
+E       assert 1 == 0
+E        +  where 1 = <Result AttributeError("module 'click' has no attribute 'echo_json'")>.exit_code
+
+tests/test_feature.py:15: AssertionError
+_____________________ test_echo_json_indent_and_sort_keys ______________________
+
+    def test_echo_json_indent_and_sort_keys():
+        runner = CliRunner()
+    
+        @click.command()
+        def cli():
+            click.echo_json({"z": 1, "a": 2}, indent=4, sort_keys=True)
+    
+        res = runner.invoke(cli)
+>       assert res.exit_code == 0
+E       assert 1 == 0
+E        +  where 1 = <Result AttributeError("module 'click' has no attribute 'echo_json'")>.exit_code
+
+tests/test_feature.py:27: AssertionError
+________________________ test_echo_json_custom_default _________________________
+
+    def test_echo_json_custom_default():
+        uid = uuid.UUID("12345678-1234-5678-1234-567812345678")
+        runner = CliRunner()
+    
+        @click.command()
+        def cli():
+            click.echo_json({"id": uid}, default=str)
+    
+        res = runner.invoke(cli)
+>       assert res.exit_code == 0
+E       assert 1 == 0
+E        +  where 1 = <Result AttributeError("module 'click' has no attribute 'echo_json'")>.exit_code
+
+tests/test_feature.py:43: AssertionError
+____________________________ test_echo_json_stderr _____________________________
+
+    def test_echo_json_stderr():
+        runner = CliRunner(mix_stderr=False)
+    
+        @click.command()
+        def cli():
+            click.echo_json({"error": "not found"}, err=True)
+    
+        res = runner.invoke(cli)
+>       assert res.exit_code == 0
+E       assert 1 == 0
+E        +  where 1 = <Result AttributeError("module 'click' has no attribute 'echo_json'")>.exit_code
+
+tests/test_feature.py:55: AssertionError
+________________________ test_echo_json_negative_indent ________________________
+
+    def test_echo_json_negative_indent():
+        with pytest.raises(ValueError, match="indent must be non-negative"):
+>           click.echo_json({"a": 1}, indent=-1)
+E           AttributeError: module 'click' has no attribute 'echo_json'
+
+tests/test_feature.py:60: AttributeError
+_____________________ test_echo_json_non_callable_default ______________________
+
+    def test_echo_json_non_callable_default():
+        with pytest.raises(TypeError, match="default must be callable"):
+>           click.echo_json({"a": 1}, default="not-callable")
+E           AttributeError: module 'click' has no attribute 'echo_json'
+
+tests/test_feature.py:64: AttributeError
+___________________________ test_echo_json_exported ____________________________
+
+    def test_echo_json_exported():
+        import click
+>       assert hasattr(click, "echo_json")
+E       AssertionError: assert False
+E        +  where False = hasattr(<module 'click' from '/workspace/click/src/click/__init__.py'>, 'echo_json')
+
+tests/test_feature.py:68: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_feature.py::test_echo_json_basic - assert 1 == 0
+FAILED tests/test_feature.py::test_echo_json_indent_and_sort_keys - assert 1 ...
+FAILED tests/test_feature.py::test_echo_json_custom_default - assert 1 == 0
+FAILED tests/test_feature.py::test_echo_json_stderr - assert 1 == 0
+FAILED tests/test_feature.py::test_echo_json_negative_indent - AttributeError...
+FAILED tests/test_feature.py::test_echo_json_non_callable_default - Attribute...
+FAILED tests/test_feature.py::test_echo_json_exported - AssertionError: asser...
+7 failed in 0.07s
+
+
+
+REGRESSION OUT:
+........................................................................ [ 63%]
+.........................................                                [100%]
+113 passed in 0.30s
+
+

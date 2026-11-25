@@ -1,0 +1,9 @@
+{
+    "jobs_dir": "jobs_h2_oracle",
+    "n_concurrent_trials": 1,
+    "tasks": [
+        {
+            "path": "tasks/final/click-command-aliases"
+        }
+    ]
+}

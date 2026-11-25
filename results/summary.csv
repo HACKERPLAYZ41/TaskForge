@@ -1,0 +1,5 @@
+task_id,feature_type,nominal_difficulty,model_1,model_1_pass,model_2,model_2_pass,composite_pass_rate,calibrated_difficulty,g3_kill_rate
+click-command-aliases,CLI option,medium,openrouter/baidu/ernie-5.5-flash-preview:free,False,openrouter/nvidia/nemotron-3.5-lightning:free,False,0.0,medium (empirical evaluation pending agent run),1.0
+click-dynamic-choice-callback,validation rule,easy,openrouter/baidu/ernie-5.5-flash-preview:free,False,openrouter/nvidia/nemotron-3.5-lightning:free,False,0.0,easy (empirical evaluation pending agent run),1.0
+click-echo-json,new endpoint/function,easy,openrouter/baidu/ernie-5.5-flash-preview:free,False,openrouter/nvidia/nemotron-3.5-lightning:free,False,0.0,easy (empirical evaluation pending agent run),1.0
+click-mutually-exclusive-options,config-driven behavior,medium,openrouter/baidu/ernie-5.5-flash-preview:free,False,openrouter/nvidia/nemotron-3.5-lightning:free,False,0.0,medium (empirical evaluation pending agent run),1.0

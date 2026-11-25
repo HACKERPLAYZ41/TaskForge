@@ -1,0 +1,57 @@
+{
+  "task_id": "click-command-aliases",
+  "target_repo": "pallets/click",
+  "base_commit": "934813e4d421071a1b3db3973c02fe2721359a6e",
+  "timestamp": 1795638711.3326638,
+  "overall_status": "PASSED",
+  "provider": "offline",
+  "gates": {
+    "G1_baseline": {
+      "passed": true,
+      "feature_tests_failed_as_expected": true,
+      "regression_tests_passed": true,
+      "log": "Feature tests failed as expected; regression tests passed."
+    },
+    "G2_reference": {
+      "passed": true,
+      "log": "Reference solution satisfies all feature and regression requirements."
+    },
+    "G3_mutation": {
+      "passed": true,
+      "total_mutants": 16,
+      "killed_mutants": 16,
+      "survived_mutants": 0,
+      "kill_rate": 1.0,
+      "log": "Killed 16/16 mutants (100.0%). Threshold >= 80% (min 10 mutants)."
+    },
+    "G4_regression_sensitivity": {
+      "passed": true,
+      "log": "Base regression suite is sensitive to mutations in existing modules."
+    },
+    "G5_flakiness": {
+      "passed": true,
+      "runs": [
+        true,
+        true,
+        true
+      ],
+      "log": "Deterministic execution verified across 3 fresh runs: [True, True, True]"
+    },
+    "G6_spec_alignment": {
+      "passed": true,
+      "judge_model": "offline_ast",
+      "test_functions_count": 5,
+      "log": "AST contract check: 5 test functions found."
+    },
+    "G7_solvability": {
+      "passed": true,
+      "agent_model": "offline",
+      "log": "Offline mode: verified specification symbols and actionable requirements."
+    },
+    "H1_harbor_lint": {
+      "passed": true,
+      "log": "Harbor lint clean (0 findings)."
+    }
+  },
+  "execution_mode": "DOCKER_CONTAINER"
+}

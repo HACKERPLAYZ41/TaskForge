@@ -1,0 +1,7 @@
+[
+  "tests/test_feature.py::test_dynamic_choice_basic",
+  "tests/test_feature.py::test_dynamic_choice_validation_failure",
+  "tests/test_feature.py::test_dynamic_choice_case_insensitive",
+  "tests/test_feature.py::test_dynamic_choice_setter_override",
+  "tests/test_feature.py::test_dynamic_choice_metavar"
+]

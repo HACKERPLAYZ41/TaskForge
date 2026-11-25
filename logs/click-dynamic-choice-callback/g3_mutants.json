@@ -1,0 +1,114 @@
+[
+  {
+    "mutant_id": "M01",
+    "operator": "flip_comparison",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_1.py\n@@ -44,7 +44,7 @@\n \n     def get_metavar(self, param: 'Parameter') -> str:\n         choices_str = '|'.join(self.choices)\n-        if param.required and param.param_type_name == 'argument':\n+        if param.required and param.param_type_name != 'argument':\n             return f'{{{choices_str}}}'\n         return f'[{choices_str}]'\n "
+  },
+  {
+    "mutant_id": "M02",
+    "operator": "flip_comparison",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_2.py\n@@ -60,7 +60,7 @@\n         if not self.case_sensitive:\n             normed_value = normed_value.casefold()\n             normed_choices = {normed_choice.casefold(): original for normed_choice, original in normed_choices.items()}\n-        if normed_value in normed_choices:\n+        if normed_value not in normed_choices:\n             return normed_choices[normed_value]\n         choices_str = ', '.join(map(repr, self.choices))\n         self.fail(ngettext('{value!r} is not {choice}.', '{value!r} is not one of {choices}.', len(self.choices)).format(value=value, choice=choices_str, choices=choices_str), param, ctx)"
+  },
+  {
+    "mutant_id": "M03",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_3.py\n@@ -18,8 +18,7 @@\n \n     def __init__(self, choices: t.Union[t.Sequence[str], t.Callable[[], t.Sequence[str]]], case_sensitive: bool=True) -> None:\n         if callable(choices):\n-            self._choices_callback: t.Optional[t.Callable[[], t.Sequence[str]]] = choices\n-            self._choices: t.Optional[t.List[str]] = None\n+            pass\n         else:\n             self._choices_callback = None\n             self._choices = list(choices)"
+  },
+  {
+    "mutant_id": "M04",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_4.py\n@@ -28,7 +28,7 @@\n     @property\n     def choices(self) -> t.Sequence[str]:\n         if self._choices_callback is not None:\n-            return list(self._choices_callback())\n+            pass\n         return self._choices or []\n \n     @choices.setter"
+  },
+  {
+    "mutant_id": "M05",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_5.py\n@@ -45,7 +45,7 @@\n     def get_metavar(self, param: 'Parameter') -> str:\n         choices_str = '|'.join(self.choices)\n         if param.required and param.param_type_name == 'argument':\n-            return f'{{{choices_str}}}'\n+            pass\n         return f'[{choices_str}]'\n \n     def get_missing_message(self, param: 'Parameter') -> str:"
+  },
+  {
+    "mutant_id": "M06",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_6.py\n@@ -55,8 +55,7 @@\n         normed_value = value\n         normed_choices = {choice: choice for choice in self.choices}\n         if ctx is not None and ctx.token_normalize_func is not None:\n-            normed_value = ctx.token_normalize_func(value)\n-            normed_choices = {ctx.token_normalize_func(normed_choice): original for normed_choice, original in normed_choices.items()}\n+            pass\n         if not self.case_sensitive:\n             normed_value = normed_value.casefold()\n             normed_choices = {normed_choice.casefold(): original for normed_choice, original in normed_choices.items()}"
+  },
+  {
+    "mutant_id": "M07",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_7.py\n@@ -58,8 +58,7 @@\n             normed_value = ctx.token_normalize_func(value)\n             normed_choices = {ctx.token_normalize_func(normed_choice): original for normed_choice, original in normed_choices.items()}\n         if not self.case_sensitive:\n-            normed_value = normed_value.casefold()\n-            normed_choices = {normed_choice.casefold(): original for normed_choice, original in normed_choices.items()}\n+            pass\n         if normed_value in normed_choices:\n             return normed_choices[normed_value]\n         choices_str = ', '.join(map(repr, self.choices))"
+  },
+  {
+    "mutant_id": "M08",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_8.py\n@@ -61,7 +61,7 @@\n             normed_value = normed_value.casefold()\n             normed_choices = {normed_choice.casefold(): original for normed_choice, original in normed_choices.items()}\n         if normed_value in normed_choices:\n-            return normed_choices[normed_value]\n+            pass\n         choices_str = ', '.join(map(repr, self.choices))\n         self.fail(ngettext('{value!r} is not {choice}.', '{value!r} is not one of {choices}.', len(self.choices)).format(value=value, choice=choices_str, choices=choices_str), param, ctx)\n "
+  },
+  {
+    "mutant_id": "M09",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_9.py\n@@ -80,7 +80,7 @@\n         from click.shell_completion import CompletionItem\n         str_choices = map(str, self.choices)\n         if self.case_sensitive:\n-            matched = (c for c in str_choices if c.startswith(incomplete))\n+            pass\n         else:\n             incomplete = incomplete.lower()\n             matched = (c for c in str_choices if c.lower().startswith(incomplete))"
+  },
+  {
+    "mutant_id": "M10",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_10.py\n@@ -28,7 +28,7 @@\n     @property\n     def choices(self) -> t.Sequence[str]:\n         if self._choices_callback is not None:\n-            return list(self._choices_callback())\n+            return None\n         return self._choices or []\n \n     @choices.setter"
+  },
+  {
+    "mutant_id": "M11",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_11.py\n@@ -29,7 +29,7 @@\n     def choices(self) -> t.Sequence[str]:\n         if self._choices_callback is not None:\n             return list(self._choices_callback())\n-        return self._choices or []\n+        return 0\n \n     @choices.setter\n     def choices(self, value: t.Sequence[str]) -> None:"
+  },
+  {
+    "mutant_id": "M12",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_12.py\n@@ -40,7 +40,7 @@\n         info_dict = super().to_info_dict()\n         info_dict['choices'] = self.choices\n         info_dict['case_sensitive'] = self.case_sensitive\n-        return info_dict\n+        return False\n \n     def get_metavar(self, param: 'Parameter') -> str:\n         choices_str = '|'.join(self.choices)"
+  },
+  {
+    "mutant_id": "M13",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_13.py\n@@ -45,7 +45,7 @@\n     def get_metavar(self, param: 'Parameter') -> str:\n         choices_str = '|'.join(self.choices)\n         if param.required and param.param_type_name == 'argument':\n-            return f'{{{choices_str}}}'\n+            return None\n         return f'[{choices_str}]'\n \n     def get_missing_message(self, param: 'Parameter') -> str:"
+  },
+  {
+    "mutant_id": "M14",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_14.py\n@@ -46,7 +46,7 @@\n         choices_str = '|'.join(self.choices)\n         if param.required and param.param_type_name == 'argument':\n             return f'{{{choices_str}}}'\n-        return f'[{choices_str}]'\n+        return 0\n \n     def get_missing_message(self, param: 'Parameter') -> str:\n         return _('Choose from:\\n\\t{choices}').format(choices=',\\n\\t'.join(self.choices))"
+  },
+  {
+    "mutant_id": "M15",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_15.py\n@@ -49,7 +49,7 @@\n         return f'[{choices_str}]'\n \n     def get_missing_message(self, param: 'Parameter') -> str:\n-        return _('Choose from:\\n\\t{choices}').format(choices=',\\n\\t'.join(self.choices))\n+        return False\n \n     def convert(self, value: t.Any, param: t.Optional['Parameter'], ctx: t.Optional['Context']) -> t.Any:\n         normed_value = value"
+  },
+  {
+    "mutant_id": "M16",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_16.py\n@@ -61,7 +61,7 @@\n             normed_value = normed_value.casefold()\n             normed_choices = {normed_choice.casefold(): original for normed_choice, original in normed_choices.items()}\n         if normed_value in normed_choices:\n-            return normed_choices[normed_value]\n+            return None\n         choices_str = ', '.join(map(repr, self.choices))\n         self.fail(ngettext('{value!r} is not {choice}.', '{value!r} is not one of {choices}.', len(self.choices)).format(value=value, choice=choices_str, choices=choices_str), param, ctx)\n "
+  }
+]

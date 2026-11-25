@@ -1,0 +1,13 @@
+MODEL ID                                                          | CONTEXT    | NAME
+---------------------------------------------------------------------------------------------------------
+baidu/ernie-5.5-flash-preview:free                                | 1024000    | Baidu: ERNIE-5.5-Flash-Preview (free)
+google/gemma-4-26b-a4b-it:free                                    | 262144     | Google: Gemma 4 26B A4B  (free)
+google/gemma-4-31b-it:free                                        | 262144     | Google: Gemma 4 31B (free)
+inclusionai/ling-3.2-flash:free                                   | 1048576    | inclusionAI: Ling 3.2 Flash (free)
+liquid/lfm-3-1.7b:free                                            | 262144     | LiquidAI: LFM3-1.7B (free)
+nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free                | 256000     | NVIDIA: Nemotron 3 Nano Omni (free)
+nvidia/nemotron-3-ultra-550b-a55b:free                            | 1000000    | NVIDIA: Nemotron 3 Ultra (free)
+nvidia/nemotron-3.5-lightning:free                                | 1000000    | NVIDIA: Nemotron 3.5 Lightning (free)
+nvidia/nemotron-3.5-super-vl:free                                 | 1000000    | NVIDIA: Nemotron 3.5 Super VL (free)
+particle-ai/particle-1:free                                       | 1048576    | Particle AI: Particle-1 (free)
+recursive/flint-v1.0:free                                         | 262144     | Recursive: Flint (free)

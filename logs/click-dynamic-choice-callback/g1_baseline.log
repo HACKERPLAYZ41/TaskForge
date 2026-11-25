@@ -1,0 +1,100 @@
+FEATURE OUT:
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+__________________________ test_dynamic_choice_basic ___________________________
+
+    def test_dynamic_choice_basic():
+        available = ["alpha", "beta"]
+        runner = CliRunner()
+    
+        @click.command()
+        @click.option("--env", type=click.Choice(lambda: available))
+        def cli(env):
+            click.echo(f"Selected: {env}")
+    
+        res1 = runner.invoke(cli, ["--env", "alpha"])
+>       assert res1.exit_code == 0
+E       assert 1 == 0
+E        +  where 1 = <Result TypeError("'function' object is not iterable")>.exit_code
+
+tests/test_feature.py:14: AssertionError
+____________________ test_dynamic_choice_validation_failure ____________________
+
+    def test_dynamic_choice_validation_failure():
+        available = ["red", "green"]
+        runner = CliRunner()
+    
+        @click.command()
+        @click.option("--color", type=click.Choice(lambda: available))
+        def cli(color):
+            click.echo(f"Color: {color}")
+    
+        res = runner.invoke(cli, ["--color", "blue"])
+        assert res.exit_code != 0
+>       assert "Choose from" in res.output or "Invalid value for" in res.output
+E       assert ('Choose from' in '' or 'Invalid value for' in '')
+E        +  where '' = <Result TypeError("'function' object is not iterable")>.output
+E        +  and   '' = <Result TypeError("'function' object is not iterable")>.output
+
+tests/test_feature.py:33: AssertionError
+_____________________ test_dynamic_choice_case_insensitive _____________________
+
+    def test_dynamic_choice_case_insensitive():
+        available = ["Dev", "Prod"]
+        runner = CliRunner()
+    
+        @click.command()
+        @click.option("--env", type=click.Choice(lambda: available, case_sensitive=False))
+        def cli(env):
+            click.echo(f"Env: {env}")
+    
+        res = runner.invoke(cli, ["--env", "dev"])
+>       assert res.exit_code == 0
+E       assert 1 == 0
+E        +  where 1 = <Result TypeError("'function' object is not iterable")>.exit_code
+
+tests/test_feature.py:45: AssertionError
+_____________________ test_dynamic_choice_setter_override ______________________
+
+    def test_dynamic_choice_setter_override():
+        available = ["apple"]
+        choice = click.Choice(lambda: available)
+>       assert list(choice.choices) == ["apple"]
+E       TypeError: 'function' object is not iterable
+
+tests/test_feature.py:51: TypeError
+_________________________ test_dynamic_choice_metavar __________________________
+
+    def test_dynamic_choice_metavar():
+        choice = click.Choice(lambda: ["foo", "bar"])
+        opt = click.Option(["--item"], type=choice)
+>       metavar = choice.get_metavar(opt)
+
+tests/test_feature.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[TypeError("'function' object is not iterable") raised in repr()] Choice object at 0x78a7b7aff1a0>
+param = <Option item>
+
+    def get_metavar(self, param: "Parameter") -> str:
+>       choices_str = "|".join(self.choices)
+E       TypeError: can only join an iterable
+
+../click/src/click/types.py:257: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_feature.py::test_dynamic_choice_basic - assert 1 == 0
+FAILED tests/test_feature.py::test_dynamic_choice_validation_failure - assert...
+FAILED tests/test_feature.py::test_dynamic_choice_case_insensitive - assert 1...
+FAILED tests/test_feature.py::test_dynamic_choice_setter_override - TypeError...
+FAILED tests/test_feature.py::test_dynamic_choice_metavar - TypeError: can on...
+5 failed in 0.07s
+
+
+
+REGRESSION OUT:
+........................................................................ [ 47%]
+........................................................................ [ 94%]
+........                                                                 [100%]
+152 passed in 0.36s
+
+

@@ -1,0 +1,114 @@
+[
+  {
+    "mutant_id": "M01",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_1.py\n@@ -133,7 +133,7 @@\n         self.format_help(ctx, formatter)\n         return formatter.getvalue().rstrip('\\n')\n \n-    def get_short_help_str(self, limit: int=45) -> str:\n+    def get_short_help_str(self, limit: int=46) -> str:\n         \"\"\"Gets short help for the command or makes it by shortening the\n         long help string.\n         \"\"\""
+  },
+  {
+    "mutant_id": "M02",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_2.py\n@@ -167,7 +167,7 @@\n     def format_help_text(self, ctx: Context, formatter: HelpFormatter) -> None:\n         \"\"\"Writes the help text to the formatter if it exists.\"\"\"\n         if self.help is not None:\n-            text = inspect.cleandoc(self.help).partition('\\x0c')[0]\n+            text = inspect.cleandoc(self.help).partition('\\x0c')[-1]\n         else:\n             text = ''\n         if self.deprecated:"
+  },
+  {
+    "mutant_id": "M03",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_3.py\n@@ -231,7 +231,7 @@\n         \"\"\"\n         from click.shell_completion import CompletionItem\n         results: t.List[CompletionItem] = []\n-        if incomplete and (not incomplete[0].isalnum()):\n+        if incomplete and (not incomplete[1].isalnum()):\n             for param in self.get_params(ctx):\n                 if not isinstance(param, Option) or param.hidden or (not param.multiple and ctx.get_parameter_source(param.name) is ParameterSource.COMMANDLINE):\n                     continue"
+  },
+  {
+    "mutant_id": "M04",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_4.py\n@@ -300,7 +300,7 @@\n         \"\"\"\n         from .decorators import command\n         func: t.Optional[t.Callable[..., t.Any]] = None\n-        if args and callable(args[0]):\n+        if args and callable(args[-1]):\n             assert len(args) == 1 and (not kwargs), \"Use 'command(**kwargs)(callable)' to provide arguments.\"\n             func, = args\n             args = ()"
+  },
+  {
+    "mutant_id": "M05",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_5.py\n@@ -301,7 +301,7 @@\n         from .decorators import command\n         func: t.Optional[t.Callable[..., t.Any]] = None\n         if args and callable(args[0]):\n-            assert len(args) == 1 and (not kwargs), \"Use 'command(**kwargs)(callable)' to provide arguments.\"\n+            assert len(args) == 2 and (not kwargs), \"Use 'command(**kwargs)(callable)' to provide arguments.\"\n             func, = args\n             args = ()\n         if self.command_class and kwargs.get('cls') is None:"
+  },
+  {
+    "mutant_id": "M06",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_6.py\n@@ -340,7 +340,7 @@\n         \"\"\"\n         from .decorators import group\n         func: t.Optional[t.Callable[..., t.Any]] = None\n-        if args and callable(args[0]):\n+        if args and callable(args[-1]):\n             assert len(args) == 1 and (not kwargs), \"Use 'group(**kwargs)(callable)' to provide arguments.\"\n             func, = args\n             args = ()"
+  },
+  {
+    "mutant_id": "M07",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_7.py\n@@ -341,7 +341,7 @@\n         from .decorators import group\n         func: t.Optional[t.Callable[..., t.Any]] = None\n         if args and callable(args[0]):\n-            assert len(args) == 1 and (not kwargs), \"Use 'group(**kwargs)(callable)' to provide arguments.\"\n+            assert len(args) == 2 and (not kwargs), \"Use 'group(**kwargs)(callable)' to provide arguments.\"\n             func, = args\n             args = ()\n         if self.group_class is not None and kwargs.get('cls') is None:"
+  },
+  {
+    "mutant_id": "M08",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_8.py\n@@ -73,7 +73,7 @@\n         rv = self.params\n         help_option = self.get_help_option(ctx)\n         if help_option is not None:\n-            rv = [*rv, help_option]\n+            pass\n         return rv\n \n     def format_usage(self, ctx: Context, formatter: HelpFormatter) -> None:"
+  },
+  {
+    "mutant_id": "M09",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_9.py\n@@ -111,7 +111,7 @@\n         \"\"\"\n         help_options = self.get_help_option_names(ctx)\n         if not help_options or not self.add_help_option:\n-            return None\n+            pass\n         if self._help_option is None:\n             from .decorators import HelpOption\n             self._help_option = HelpOption(help_options)"
+  },
+  {
+    "mutant_id": "M10",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_10.py\n@@ -113,8 +113,7 @@\n         if not help_options or not self.add_help_option:\n             return None\n         if self._help_option is None:\n-            from .decorators import HelpOption\n-            self._help_option = HelpOption(help_options)\n+            pass\n         return self._help_option\n \n     def make_parser(self, ctx: Context) -> OptionParser:"
+  },
+  {
+    "mutant_id": "M11",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_11.py\n@@ -138,7 +138,7 @@\n         long help string.\n         \"\"\"\n         if self.short_help:\n-            text = inspect.cleandoc(self.short_help)\n+            pass\n         elif self.help:\n             text = make_default_short_help(self.help, limit)\n         else:"
+  },
+  {
+    "mutant_id": "M12",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_12.py\n@@ -140,7 +140,7 @@\n         if self.short_help:\n             text = inspect.cleandoc(self.short_help)\n         elif self.help:\n-            text = make_default_short_help(self.help, limit)\n+            pass\n         else:\n             text = ''\n         if self.deprecated:"
+  },
+  {
+    "mutant_id": "M13",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_13.py\n@@ -144,7 +144,7 @@\n         else:\n             text = ''\n         if self.deprecated:\n-            text = _('(Deprecated) {text}').format(text=text)\n+            pass\n         return text.strip()\n \n     def format_help(self, ctx: Context, formatter: HelpFormatter) -> None:"
+  },
+  {
+    "mutant_id": "M14",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_14.py\n@@ -167,7 +167,7 @@\n     def format_help_text(self, ctx: Context, formatter: HelpFormatter) -> None:\n         \"\"\"Writes the help text to the formatter if it exists.\"\"\"\n         if self.help is not None:\n-            text = inspect.cleandoc(self.help).partition('\\x0c')[0]\n+            pass\n         else:\n             text = ''\n         if self.deprecated:"
+  },
+  {
+    "mutant_id": "M15",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_15.py\n@@ -171,7 +171,7 @@\n         else:\n             text = ''\n         if self.deprecated:\n-            text = _('(Deprecated) {text}').format(text=text)\n+            pass\n         if text:\n             formatter.write_paragraph()\n             with formatter.indentation():"
+  },
+  {
+    "mutant_id": "M16",
+    "operator": "return_default",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_16.py\n@@ -58,7 +58,7 @@\n     def to_info_dict(self, ctx: Context) -> t.Dict[str, t.Any]:\n         info_dict = super().to_info_dict(ctx)\n         info_dict.update(params=[param.to_info_dict() for param in self.get_params(ctx)], help=self.help, epilog=self.epilog, short_help=self.short_help, hidden=self.hidden, deprecated=self.deprecated)\n-        return info_dict\n+        return None\n \n     def get_usage(self, ctx: Context) -> str:\n         \"\"\"Formats the usage line into a string and returns it."
+  }
+]

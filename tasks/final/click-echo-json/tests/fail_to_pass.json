@@ -1,0 +1,9 @@
+[
+  "tests/test_feature.py::test_echo_json_basic",
+  "tests/test_feature.py::test_echo_json_indent_and_sort_keys",
+  "tests/test_feature.py::test_echo_json_custom_default",
+  "tests/test_feature.py::test_echo_json_stderr",
+  "tests/test_feature.py::test_echo_json_negative_indent",
+  "tests/test_feature.py::test_echo_json_non_callable_default",
+  "tests/test_feature.py::test_echo_json_exported"
+]

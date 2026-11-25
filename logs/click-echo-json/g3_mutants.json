@@ -1,0 +1,107 @@
+[
+  {
+    "mutant_id": "M01",
+    "operator": "flip_comparison",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_1.py\n@@ -1,7 +1,7 @@\n def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n-    if indent is not None and indent < 0:\n+    if indent is not None and indent >= 0:\n         raise ValueError('indent must be non-negative')\n     if default is not None and (not callable(default)):\n         raise TypeError('default must be callable')"
+  },
+  {
+    "mutant_id": "M02",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_2.py\n@@ -1,4 +1,4 @@\n-def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n+def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=3, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n     if indent is not None and indent < 0:"
+  },
+  {
+    "mutant_id": "M03",
+    "operator": "off_by_one",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_3.py\n@@ -1,7 +1,7 @@\n def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n-    if indent is not None and indent < 0:\n+    if indent is not None and indent < -1:\n         raise ValueError('indent must be non-negative')\n     if default is not None and (not callable(default)):\n         raise TypeError('default must be callable')"
+  },
+  {
+    "mutant_id": "M04",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_4.py\n@@ -2,7 +2,7 @@\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n     if indent is not None and indent < 0:\n-        raise ValueError('indent must be non-negative')\n+        pass\n     if default is not None and (not callable(default)):\n         raise TypeError('default must be callable')\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)"
+  },
+  {
+    "mutant_id": "M05",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_5.py\n@@ -4,7 +4,7 @@\n     if indent is not None and indent < 0:\n         raise ValueError('indent must be non-negative')\n     if default is not None and (not callable(default)):\n-        raise TypeError('default must be callable')\n+        pass\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)\n     if nl:\n         text = text + '\\n' if not text.endswith('\\n') else text"
+  },
+  {
+    "mutant_id": "M06",
+    "operator": "remove_branch",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_6.py\n@@ -7,5 +7,5 @@\n         raise TypeError('default must be callable')\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)\n     if nl:\n-        text = text + '\\n' if not text.endswith('\\n') else text\n+        pass\n     echo(text, file=file, nl=False, err=err)"
+  },
+  {
+    "mutant_id": "M07",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_7.py\n@@ -1,4 +1,4 @@\n-def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n+def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=False, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n     if indent is not None and indent < 0:"
+  },
+  {
+    "mutant_id": "M08",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_8.py\n@@ -1,4 +1,4 @@\n-def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n+def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=True, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n     if indent is not None and indent < 0:"
+  },
+  {
+    "mutant_id": "M09",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_9.py\n@@ -1,4 +1,4 @@\n-def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n+def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=True, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n     if indent is not None and indent < 0:"
+  },
+  {
+    "mutant_id": "M10",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_10.py\n@@ -1,7 +1,7 @@\n def echo_json(obj: t.Any, file: t.Optional[t.IO[t.Any]]=None, nl: bool=True, err: bool=False, indent: t.Optional[int]=2, sort_keys: bool=False, default: t.Optional[t.Callable[[t.Any], t.Any]]=None) -> None:\n     \"\"\"Print an object as JSON formatted string using :func:`echo`.\"\"\"\n     import json\n-    if indent is not None and indent < 0:\n+    if indent is not None or indent < 0:\n         raise ValueError('indent must be non-negative')\n     if default is not None and (not callable(default)):\n         raise TypeError('default must be callable')"
+  },
+  {
+    "mutant_id": "M11",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_11.py\n@@ -3,7 +3,7 @@\n     import json\n     if indent is not None and indent < 0:\n         raise ValueError('indent must be non-negative')\n-    if default is not None and (not callable(default)):\n+    if default is not None or not callable(default):\n         raise TypeError('default must be callable')\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)\n     if nl:"
+  },
+  {
+    "mutant_id": "M12",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_12.py\n@@ -3,7 +3,7 @@\n     import json\n     if indent is not None and indent < 0:\n         raise ValueError('indent must be non-negative')\n-    if default is not None and (not callable(default)):\n+    if default is not None and callable(default):\n         raise TypeError('default must be callable')\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)\n     if nl:"
+  },
+  {
+    "mutant_id": "M13",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_13.py\n@@ -7,5 +7,5 @@\n         raise TypeError('default must be callable')\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)\n     if nl:\n-        text = text + '\\n' if not text.endswith('\\n') else text\n+        text = text + '\\n' if text.endswith('\\n') else text\n     echo(text, file=file, nl=False, err=err)"
+  },
+  {
+    "mutant_id": "M14",
+    "operator": "invert_boolean",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_14.py\n@@ -8,4 +8,4 @@\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)\n     if nl:\n         text = text + '\\n' if not text.endswith('\\n') else text\n-    echo(text, file=file, nl=False, err=err)\n+    echo(text, file=file, nl=True, err=err)"
+  },
+  {
+    "mutant_id": "M15",
+    "operator": "binary_op",
+    "status": "KILLED",
+    "reason": "assertion_failure",
+    "diff": "--- original.py\n+++ mutant_15.py\n@@ -7,5 +7,5 @@\n         raise TypeError('default must be callable')\n     text = json.dumps(obj, indent=indent, sort_keys=sort_keys, default=default)\n     if nl:\n-        text = text + '\\n' if not text.endswith('\\n') else text\n+        text = text - '\\n' if not text.endswith('\\n') else text\n     echo(text, file=file, nl=False, err=err)"
+  }
+]

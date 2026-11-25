@@ -1,0 +1,37 @@
+repo_identifier: "pallets/click"
+repo_url: "https://github.com/pallets/click.git"
+base_commit: "934813e4d421071a1b3db3973c02fe2721359a6e"
+version_tag: "8.1.8"
+license: "BSD-3-Clause"
+language: "python"
+python_version: "3.12"
+harbor_version: "0.25.0"
+docker_base_image: "python:3.12-slim-bookworm"
+docker_image_tag: "taskforge-click-baseline:8.1.8"
+repo_path: ~/.cache/click_repo
+test_command: "pytest -q"
+seed: 42
+generator_version: "1.0.0"
+
+provider:
+  name: openrouter
+  api_key_env: OPENROUTER_API_KEY
+  call_delay_sec: 1.5
+  cache_dir: .cache/llm
+
+roles:
+  generator:
+    primary: "openrouter/baidu/ernie-5.5-flash-preview:free"
+    fallbacks:
+      - "openrouter/nvidia/nemotron-3.5-lightning:free"
+      - "openrouter/google/gemma-4-31b-it:free"
+  judge:
+    primary: "openrouter/nvidia/nemotron-3.5-lightning:free"
+    fallbacks:
+      - "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
+      - "openrouter/baidu/ernie-5.5-flash-preview:free"
+  agent:
+    primary: "openrouter/baidu/ernie-5.5-flash-preview:free"
+    eval_model_2: "openrouter/nvidia/nemotron-3.5-lightning:free"
+    fallbacks:
+      - "openrouter/google/gemma-4-31b-it:free"

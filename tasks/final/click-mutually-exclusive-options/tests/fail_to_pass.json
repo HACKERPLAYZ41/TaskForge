@@ -1,0 +1,6 @@
+[
+  "tests/test_feature.py::test_mutex_single_option_passes",
+  "tests/test_feature.py::test_mutex_conflict_raises_usage_error",
+  "tests/test_feature.py::test_mutex_defaults_do_not_conflict",
+  "tests/test_feature.py::test_mutex_order_independence"
+]

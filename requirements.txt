@@ -1,0 +1,7 @@
+harbor>=0.26.0
+pytest>=9.2.0
+pyyaml>=6.0.3
+anthropic>=0.40.0
+toml>=0.10.2
+cyclopts>=5.5.0
+pydantic>=2.10.0

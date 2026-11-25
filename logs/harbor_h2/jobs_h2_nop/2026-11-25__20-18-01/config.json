@@ -1,0 +1,14 @@
+{
+    "jobs_dir": "jobs_h2_nop",
+    "n_concurrent_trials": 1,
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "tasks/final/click-command-aliases"
+        }
+    ]
+}

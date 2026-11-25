@@ -1,0 +1,36 @@
+schema_version = "1.4"
+
+[task]
+name = "taskforge/click-mutually-exclusive-options"
+[[task.authors]]
+name = "TaskForge Pipeline"
+email = "taskforge@innodata.ai"
+
+[metadata]
+repo_identifier = "pallets/click"
+repo_url = "https://github.com/pallets/click.git"
+base_commit = "934813e4d421071a1b3db3973c02fe2721359a6e"
+license = "BSD-3-Clause"
+harbor_version = "0.25.0"
+feature_type = "config-driven behavior"
+difficulty = "medium"
+seed = 42
+generator_version = "1.0.0"
+provider = "offline"
+model = "template"
+summary = "Add mutually_exclusive parameter to Option to automatically reject conflicting CLI options when both are provided."
+
+[verifier]
+timeout_sec = 120.0
+user = "root"
+environment_mode = "shared"
+network_mode = "no-network"
+
+[agent]
+timeout_sec = 300.0
+user = "root"
+
+[environment]
+cpus = 1
+memory_mb = 2048
+storage_mb = 4096

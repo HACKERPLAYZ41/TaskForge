@@ -1,0 +1,9 @@
+{
+  "task_id": "click-command-aliases",
+  "agent": "oracle",
+  "score": 1.0,
+  "expected": 1.0,
+  "passed": true,
+  "duration_sec": 0.44,
+  "test_output": ".....                                                                    [100%]\n5 passed in 0.03s\n"
+}

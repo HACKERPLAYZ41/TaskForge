@@ -1,0 +1,299 @@
+=== TASKFORGE PALLETS/CLICK BASELINE VERIFICATION ===
+Timestamp: Wed Nov 25 07:42:52 PM UTC 2026
+Host info:
+Linux blockcode 7.0.0-44-generic #44-Ubuntu SMP PREEMPT_DYNAMIC Fri Nov  6 02:38:04 UTC 2026 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           7.1Gi       1.1Gi       5.1Gi        59Mi       1.2Gi       6.0Gi
+Swap:          4.0Gi          0B       4.0Gi
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv  232G  203G   18G  92% /
+
+=== Harbor Version ===
+0.25.0
+
+=== Building Docker Environment for pallets/click ===
+Sending build context to Docker daemon  2.048kB
+Step 1/8 : FROM python:3.12-slim-bookworm
+3.12-slim-bookworm: Pulling from library/python
+700042941e8d: Pulling fs layer
+38f2d47d8c02: Pulling fs layer
+35c1cb66845b: Pulling fs layer
+b1dd3d113aab: Pulling fs layer
+700042941e8d: Download complete
+5333e6f58199: Download complete
+515c37701ecc: Download complete
+38f2d47d8c02: Download complete
+35c1cb66845b: Download complete
+b1dd3d113aab: Download complete
+b1dd3d113aab: Pull complete
+38f2d47d8c02: Pull complete
+700042941e8d: Pull complete
+35c1cb66845b: Pull complete
+Digest: sha256:44cf1793efa7c7a476bb0f2cff81443f4a072c90c1cb127e2924933daa3e8c64
+Status: Downloaded newer image for python:3.12-slim-bookworm
+ ---> 44cf1793efa7
+Step 2/8 : RUN apt-get update && apt-get install -y --no-install-recommends     git     locales     && rm -rf /var/lib/apt/lists/*
+ ---> Running in 7cb09e43854a
+Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [381 kB]
+Fetched 9420 kB in 4s (2418 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  git-man libbrotli1 libc-l10n libcurl3-gnutls liberror-perl libexpat1
+  libgdbm-compat4 libldap-2.5-0 libnghttp2-14 libperl5.36 libpsl5 librtmp1
+  libsasl2-2 libsasl2-modules-db libssh2-1 perl perl-modules-5.36
+Suggested packages:
+  gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui
+  gitk gitweb git-cvs git-mediawiki git-svn sensible-utils perl-doc
+  libterm-readline-gnu-perl | libterm-readline-perl-perl make
+  libtap-harness-archive-perl
+Recommended packages:
+  patch less ssh-client libldap-common publicsuffix libsasl2-modules
+The following NEW packages will be installed:
+  git git-man libbrotli1 libc-l10n libcurl3-gnutls liberror-perl libexpat1
+  libgdbm-compat4 libldap-2.5-0 libnghttp2-14 libperl5.36 libpsl5 librtmp1
+  libsasl2-2 libsasl2-modules-db libssh2-1 locales perl perl-modules-5.36
+0 upgraded, 19 newly installed, 0 to remove and 0 not upgraded.
+Need to get 22.6 MB of archives.
+After this operation, 121 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian-security bookworm-security/main amd64 perl-modules-5.36 all 5.36.0-7+deb12u4 [2817 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libgdbm-compat4 amd64 1.23-3 [48.2 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security/main amd64 libperl5.36 amd64 5.36.0-7+deb12u4 [4208 kB]
+Get:4 http://deb.debian.org/debian-security bookworm-security/main amd64 perl amd64 5.36.0-7+deb12u4 [239 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libc-l10n all 2.36-9+deb12u14 [676 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 locales all 2.36-9+deb12u14 [3906 kB]
+Get:7 http://deb.debian.org/debian-security bookworm-security/main amd64 libbrotli1 amd64 1.0.9-2+deb12u1 [275 kB]
+Get:8 http://deb.debian.org/debian-security bookworm-security/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg-10+deb12u1 [20.5 kB]
+Get:9 http://deb.debian.org/debian-security bookworm-security/main amd64 libsasl2-2 amd64 2.1.28+dfsg-10+deb12u1 [59.9 kB]
+Get:10 http://deb.debian.org/debian bookworm/main amd64 libldap-2.5-0 amd64 2.5.13+dfsg-5 [183 kB]
+Get:11 http://deb.debian.org/debian bookworm/main amd64 libnghttp2-14 amd64 1.52.0-1+deb12u3 [72.4 kB]
+Get:12 http://deb.debian.org/debian bookworm/main amd64 libpsl5 amd64 0.21.2-1 [58.7 kB]
+Get:13 http://deb.debian.org/debian bookworm/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2+b2 [60.8 kB]
+Get:14 http://deb.debian.org/debian-security bookworm-security/main amd64 libssh2-1 amd64 1.10.0-3+deb12u1 [176 kB]
+Get:15 http://deb.debian.org/debian bookworm/main amd64 libcurl3-gnutls amd64 7.88.1-10+deb12u15 [386 kB]
+Get:16 http://deb.debian.org/debian-security bookworm-security/main amd64 libexpat1 amd64 2.5.0-1+deb12u5 [108 kB]
+Get:17 http://deb.debian.org/debian bookworm/main amd64 liberror-perl all 0.17029-2 [29.0 kB]
+Get:18 http://deb.debian.org/debian bookworm/main amd64 git-man all 1:2.39.5-0+deb12u3 [2053 kB]
+Get:19 http://deb.debian.org/debian bookworm/main amd64 git amd64 1:2.39.5-0+deb12u3 [7264 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 22.6 MB in 6s (3494 kB/s)
+Selecting previously unselected package perl-modules-5.36.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6701 files and directories currently installed.)
+Preparing to unpack .../00-perl-modules-5.36_5.36.0-7+deb12u4_all.deb ...
+Unpacking perl-modules-5.36 (5.36.0-7+deb12u4) ...
+Selecting previously unselected package libgdbm-compat4:amd64.
+Preparing to unpack .../01-libgdbm-compat4_1.23-3_amd64.deb ...
+Unpacking libgdbm-compat4:amd64 (1.23-3) ...
+Selecting previously unselected package libperl5.36:amd64.
+Preparing to unpack .../02-libperl5.36_5.36.0-7+deb12u4_amd64.deb ...
+Unpacking libperl5.36:amd64 (5.36.0-7+deb12u4) ...
+Selecting previously unselected package perl.
+Preparing to unpack .../03-perl_5.36.0-7+deb12u4_amd64.deb ...
+Unpacking perl (5.36.0-7+deb12u4) ...
+Selecting previously unselected package libc-l10n.
+Preparing to unpack .../04-libc-l10n_2.36-9+deb12u14_all.deb ...
+Unpacking libc-l10n (2.36-9+deb12u14) ...
+Selecting previously unselected package locales.
+Preparing to unpack .../05-locales_2.36-9+deb12u14_all.deb ...
+Unpacking locales (2.36-9+deb12u14) ...
+Selecting previously unselected package libbrotli1:amd64.
+Preparing to unpack .../06-libbrotli1_1.0.9-2+deb12u1_amd64.deb ...
+Unpacking libbrotli1:amd64 (1.0.9-2+deb12u1) ...
+Selecting previously unselected package libsasl2-modules-db:amd64.
+Preparing to unpack .../07-libsasl2-modules-db_2.1.28+dfsg-10+deb12u1_amd64.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg-10+deb12u1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../08-libsasl2-2_2.1.28+dfsg-10+deb12u1_amd64.deb ...
+Unpacking libsasl2-2:amd64 (2.1.28+dfsg-10+deb12u1) ...
+Selecting previously unselected package libldap-2.5-0:amd64.
+Preparing to unpack .../09-libldap-2.5-0_2.5.13+dfsg-5_amd64.deb ...
+Unpacking libldap-2.5-0:amd64 (2.5.13+dfsg-5) ...
+Selecting previously unselected package libnghttp2-14:amd64.
+Preparing to unpack .../10-libnghttp2-14_1.52.0-1+deb12u3_amd64.deb ...
+Unpacking libnghttp2-14:amd64 (1.52.0-1+deb12u3) ...
+Selecting previously unselected package libpsl5:amd64.
+Preparing to unpack .../11-libpsl5_0.21.2-1_amd64.deb ...
+Unpacking libpsl5:amd64 (0.21.2-1) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../12-librtmp1_2.4+20151223.gitfa8646d.1-2+b2_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+Selecting previously unselected package libssh2-1:amd64.
+Preparing to unpack .../13-libssh2-1_1.10.0-3+deb12u1_amd64.deb ...
+Unpacking libssh2-1:amd64 (1.10.0-3+deb12u1) ...
+Selecting previously unselected package libcurl3-gnutls:amd64.
+Preparing to unpack .../14-libcurl3-gnutls_7.88.1-10+deb12u15_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.88.1-10+deb12u15) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../15-libexpat1_2.5.0-1+deb12u5_amd64.deb ...
+Unpacking libexpat1:amd64 (2.5.0-1+deb12u5) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../16-liberror-perl_0.17029-2_all.deb ...
+Unpacking liberror-perl (0.17029-2) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../17-git-man_1%3a2.39.5-0+deb12u3_all.deb ...
+Unpacking git-man (1:2.39.5-0+deb12u3) ...
+Selecting previously unselected package git.
+Preparing to unpack .../18-git_1%3a2.39.5-0+deb12u3_amd64.deb ...
+Unpacking git (1:2.39.5-0+deb12u3) ...
+Setting up libexpat1:amd64 (2.5.0-1+deb12u5) ...
+Setting up libc-l10n (2.36-9+deb12u14) ...
+Setting up libpsl5:amd64 (0.21.2-1) ...
+Setting up libbrotli1:amd64 (1.0.9-2+deb12u1) ...
+Setting up libnghttp2-14:amd64 (1.52.0-1+deb12u3) ...
+Setting up locales (2.36-9+deb12u14) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Generating locales (this might take a while)...
+Generation complete.
+Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg-10+deb12u1) ...
+Setting up perl-modules-5.36 (5.36.0-7+deb12u4) ...
+Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b2) ...
+Setting up libgdbm-compat4:amd64 (1.23-3) ...
+Setting up libsasl2-2:amd64 (2.1.28+dfsg-10+deb12u1) ...
+Setting up git-man (1:2.39.5-0+deb12u3) ...
+Setting up libssh2-1:amd64 (1.10.0-3+deb12u1) ...
+Setting up libperl5.36:amd64 (5.36.0-7+deb12u4) ...
+Setting up libldap-2.5-0:amd64 (2.5.13+dfsg-5) ...
+Setting up perl (5.36.0-7+deb12u4) ...
+Setting up libcurl3-gnutls:amd64 (7.88.1-10+deb12u15) ...
+Setting up liberror-perl (0.17029-2) ...
+Setting up git (1:2.39.5-0+deb12u3) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+ ---> Removed intermediate container 7cb09e43854a
+ ---> 01a6f054ebc2
+Step 3/8 : RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
+ ---> Running in b8943dd33640
+Generating locales (this might take a while)...
+  en_US.UTF-8... done
+Generation complete.
+ ---> Removed intermediate container b8943dd33640
+ ---> b07bb9bb9e7f
+Step 4/8 : ENV LANG=en_US.UTF-8
+ ---> Running in 9fe1d1d9fe01
+ ---> Removed intermediate container 9fe1d1d9fe01
+ ---> 3da14cd7cdc2
+Step 5/8 : ENV LC_ALL=en_US.UTF-8
+ ---> Running in 66d7a4f7af45
+ ---> Removed intermediate container 66d7a4f7af45
+ ---> 2c894ed02f5e
+Step 6/8 : WORKDIR /workspace/click
+ ---> Running in 4a9f4caecfba
+ ---> Removed intermediate container 4a9f4caecfba
+ ---> 1c8e59a762fa
+Step 7/8 : RUN git clone https://github.com/pallets/click.git . &&     git checkout 934813e4d421071a1b3db3973c02fe2721359a6e
+ ---> Running in 23da776b67af
+[91mCloning into '.'...
+[0m[91mNote: switching to '934813e4d421071a1b3db3973c02fe2721359a6e'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 934813e release version 8.1.8
+[0m ---> Removed intermediate container 23da776b67af
+ ---> 6f8c463a1838
+Step 8/8 : RUN pip install --no-cache-dir -e . pytest==8.3.4
+ ---> Running in 05b64e1b9828
+Obtaining file:///workspace/click
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Collecting pytest==8.3.4
+  Downloading pytest-8.3.4-py3-none-any.whl.metadata (7.5 kB)
+Collecting iniconfig (from pytest==8.3.4)
+  Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging (from pytest==8.3.4)
+  Downloading packaging-26.4-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy<2,>=1.5 (from pytest==8.3.4)
+  Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Downloading pytest-8.3.4-py3-none-any.whl (343 kB)
+Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Downloading packaging-26.4-py3-none-any.whl (140 kB)
+Building wheels for collected packages: click
+  Building editable for click (pyproject.toml): started
+  Building editable for click (pyproject.toml): finished with status 'done'
+  Created wheel for click: filename=click-8.1.8-py3-none-any.whl size=2948 sha256=2787608c41f7221683ee6d7248ec2a893722f29c1c079434245e3b397e3ae0a4
+  Stored in directory: /tmp/pip-ephem-wheel-cache-xcq3xw_x/wheels/83/da/36/24d155dc615882a115179151fdbff81fa0e5626a829d7e7158
+Successfully built click
+Installing collected packages: pluggy, packaging, iniconfig, click, pytest
+Successfully installed click-8.1.8 iniconfig-2.3.1 packaging-26.4 pluggy-1.7.0 pytest-8.3.4
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m[91m
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+[0m ---> Removed intermediate container 05b64e1b9828
+ ---> 2eada7df9056
+Successfully built 2eada7df9056
+Successfully tagged taskforge-click-baseline:8.1.8
+
+=== Running Baseline Test Suite 3 Times (Sequential) ===
+--- Run 1 ---
+........................................................................ [ 11%]
+...................................x.................................... [ 22%]
+........................................................................ [ 33%]
+........................................................................ [ 44%]
+........................................................................ [ 55%]
+........................................................................ [ 66%]
+.....................sssssssssssssssssssss.............................. [ 77%]
+........................................................................ [ 88%]
+........................................................................ [ 99%]
+..                                                                       [100%]
+628 passed, 21 skipped, 1 xfailed in 2.01s
+Run 1 completed in 3s
+--- Run 2 ---
+........................................................................ [ 11%]
+...................................x.................................... [ 22%]
+........................................................................ [ 33%]
+........................................................................ [ 44%]
+........................................................................ [ 55%]
+........................................................................ [ 66%]
+.....................sssssssssssssssssssss.............................. [ 77%]
+........................................................................ [ 88%]
+........................................................................ [ 99%]
+..                                                                       [100%]
+628 passed, 21 skipped, 1 xfailed in 1.99s
+Run 2 completed in 2s
+--- Run 3 ---
+........................................................................ [ 11%]
+...................................x.................................... [ 22%]
+........................................................................ [ 33%]
+........................................................................ [ 44%]
+........................................................................ [ 55%]
+........................................................................ [ 66%]
+.....................sssssssssssssssssssss.............................. [ 77%]
+........................................................................ [ 88%]
+........................................................................ [ 99%]
+..                                                                       [100%]
+628 passed, 21 skipped, 1 xfailed in 2.00s
+Run 3 completed in 3s
+
+=== Baseline Verification Complete ===

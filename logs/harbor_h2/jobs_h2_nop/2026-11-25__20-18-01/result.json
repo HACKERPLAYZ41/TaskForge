@@ -1,0 +1,39 @@
+{
+    "id": "1bae1ab9-c2e9-4b3e-bf8c-b0de27cf2040",
+    "started_at": "2026-11-25T20:18:01.125981",
+    "updated_at": "2026-11-25T20:18:34.308057",
+    "finished_at": "2026-11-25T20:18:34.308057",
+    "n_total_trials": 1,
+    "stats": {
+        "n_completed_trials": 1,
+        "n_errored_trials": 0,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "nop__adhoc": {
+                "n_trials": 1,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "click-command-aliases__Vu7g9G9"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null
+    }
+}

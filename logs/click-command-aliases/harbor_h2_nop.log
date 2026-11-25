@@ -1,0 +1,249 @@
+FFFFF................................................................... [ 59%]
+.................................................                        [100%]
+=================================== FAILURES ===================================
+__________________________ test_command_aliases_basic __________________________
+
+    def test_command_aliases_basic():
+        runner = CliRunner()
+    
+        @click.group()
+        def cli():
+            pass
+    
+>       @cli.command("checkout", aliases=["co"])
+
+/tests/test_feature.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/click/core.py:1894: in decorator
+    cmd: Command = command(*args, **kwargs)(f)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+f = <function test_command_aliases_basic.<locals>.checkout at 0x7c8469fdcd60>
+
+    def decorator(f: _AnyCallable) -> CmdType:
+        if isinstance(f, Command):
+            raise TypeError("Attempted to convert a callback into a command twice.")
+    
+        attr_params = attrs.pop("params", None)
+        params = attr_params if attr_params is not None else []
+    
+        try:
+            decorator_params = f.__click_params__  # type: ignore
+        except AttributeError:
+            pass
+        else:
+            del f.__click_params__  # type: ignore
+            params.extend(reversed(decorator_params))
+    
+        if attrs.get("help") is None:
+            attrs["help"] = f.__doc__
+    
+        if t.TYPE_CHECKING:
+            assert cls is not None
+            assert not callable(name)
+    
+>       cmd = cls(
+            name=name or f.__name__.lower().replace("_", "-"),
+            callback=f,
+            params=params,
+            **attrs,
+        )
+E       TypeError: Command.__init__() got an unexpected keyword argument 'aliases'
+
+src/click/decorators.py:234: TypeError
+________________________ test_command_multiple_aliases _________________________
+
+    def test_command_multiple_aliases():
+        runner = CliRunner()
+    
+        @click.group()
+        def cli():
+            pass
+    
+>       @cli.command("status", aliases=["st", "stat", "check"])
+
+/tests/test_feature.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/click/core.py:1894: in decorator
+    cmd: Command = command(*args, **kwargs)(f)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+f = <function test_command_multiple_aliases.<locals>.status at 0x7c8469fdd3a0>
+
+    def decorator(f: _AnyCallable) -> CmdType:
+        if isinstance(f, Command):
+            raise TypeError("Attempted to convert a callback into a command twice.")
+    
+        attr_params = attrs.pop("params", None)
+        params = attr_params if attr_params is not None else []
+    
+        try:
+            decorator_params = f.__click_params__  # type: ignore
+        except AttributeError:
+            pass
+        else:
+            del f.__click_params__  # type: ignore
+            params.extend(reversed(decorator_params))
+    
+        if attrs.get("help") is None:
+            attrs["help"] = f.__doc__
+    
+        if t.TYPE_CHECKING:
+            assert cls is not None
+            assert not callable(name)
+    
+>       cmd = cls(
+            name=name or f.__name__.lower().replace("_", "-"),
+            callback=f,
+            params=params,
+            **attrs,
+        )
+E       TypeError: Command.__init__() got an unexpected keyword argument 'aliases'
+
+src/click/decorators.py:234: TypeError
+____________________________ test_subgroup_aliases _____________________________
+
+    def test_subgroup_aliases():
+        runner = CliRunner()
+    
+        @click.group()
+        def cli():
+            pass
+    
+>       @cli.group("remote", aliases=["rem"])
+
+/tests/test_feature.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/click/core.py:1946: in decorator
+    cmd: Group = group(*args, **kwargs)(f)
+src/click/decorators.py:234: in decorator
+    cmd = cls(
+src/click/core.py:1834: in __init__
+    super().__init__(name, **attrs)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <[AttributeError("'Group' object has no attribute 'name'") raised in repr()] Group object at 0x7c846a2c5a00>
+name = 'remote', invoke_without_command = False, no_args_is_help = None
+subcommand_metavar = None, chain = False, result_callback = None
+attrs = {'aliases': ['rem'], 'callback': <function test_subgroup_aliases.<locals>.remote_group at 0x7c8469fddb20>, 'help': None, 'params': []}
+
+    def __init__(
+        self,
+        name: t.Optional[str] = None,
+        invoke_without_command: bool = False,
+        no_args_is_help: t.Optional[bool] = None,
+        subcommand_metavar: t.Optional[str] = None,
+        chain: bool = False,
+        result_callback: t.Optional[t.Callable[..., t.Any]] = None,
+        **attrs: t.Any,
+    ) -> None:
+>       super().__init__(name, **attrs)
+E       TypeError: Command.__init__() got an unexpected keyword argument 'aliases'
+
+src/click/core.py:1520: TypeError
+_________________ test_aliases_not_duplicated_in_list_commands _________________
+
+    def test_aliases_not_duplicated_in_list_commands():
+        @click.group()
+        def cli():
+            pass
+    
+>       @cli.command("run", aliases=["r", "start"])
+
+/tests/test_feature.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/click/core.py:1894: in decorator
+    cmd: Command = command(*args, **kwargs)(f)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+f = <function test_aliases_not_duplicated_in_list_commands.<locals>.run_cmd at 0x7c8469fdd300>
+
+    def decorator(f: _AnyCallable) -> CmdType:
+        if isinstance(f, Command):
+            raise TypeError("Attempted to convert a callback into a command twice.")
+    
+        attr_params = attrs.pop("params", None)
+        params = attr_params if attr_params is not None else []
+    
+        try:
+            decorator_params = f.__click_params__  # type: ignore
+        except AttributeError:
+            pass
+        else:
+            del f.__click_params__  # type: ignore
+            params.extend(reversed(decorator_params))
+    
+        if attrs.get("help") is None:
+            attrs["help"] = f.__doc__
+    
+        if t.TYPE_CHECKING:
+            assert cls is not None
+            assert not callable(name)
+    
+>       cmd = cls(
+            name=name or f.__name__.lower().replace("_", "-"),
+            callback=f,
+            params=params,
+            **attrs,
+        )
+E       TypeError: Command.__init__() got an unexpected keyword argument 'aliases'
+
+src/click/decorators.py:234: TypeError
+___________________________ test_unknown_alias_error ___________________________
+
+    def test_unknown_alias_error():
+        runner = CliRunner()
+    
+        @click.group()
+        def cli():
+            pass
+    
+>       @cli.command("build", aliases=["b"])
+
+/tests/test_feature.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/click/core.py:1894: in decorator
+    cmd: Command = command(*args, **kwargs)(f)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+f = <function test_unknown_alias_error.<locals>.build_cmd at 0x7c8469f8a980>
+
+    def decorator(f: _AnyCallable) -> CmdType:
+        if isinstance(f, Command):
+            raise TypeError("Attempted to convert a callback into a command twice.")
+    
+        attr_params = attrs.pop("params", None)
+        params = attr_params if attr_params is not None else []
+    
+        try:
+            decorator_params = f.__click_params__  # type: ignore
+        except AttributeError:
+            pass
+        else:
+            del f.__click_params__  # type: ignore
+            params.extend(reversed(decorator_params))
+    
+        if attrs.get("help") is None:
+            attrs["help"] = f.__doc__
+    
+        if t.TYPE_CHECKING:
+            assert cls is not None
+            assert not callable(name)
+    
+>       cmd = cls(
+            name=name or f.__name__.lower().replace("_", "-"),
+            callback=f,
+            params=params,
+            **attrs,
+        )
+E       TypeError: Command.__init__() got an unexpected keyword argument 'aliases'
+
+src/click/decorators.py:234: TypeError
+=========================== short test summary info ============================
+FAILED ::test_command_aliases_basic - TypeError: Command.__init__() got an un...
+FAILED ::test_command_multiple_aliases - TypeError: Command.__init__() got an...
+FAILED ::test_subgroup_aliases - TypeError: Command.__init__() got an unexpec...
+FAILED ::test_aliases_not_duplicated_in_list_commands - TypeError: Command.__...
+FAILED ::test_unknown_alias_error - TypeError: Command.__init__() got an unex...
+5 failed, 116 passed in 0.88s
+=== TaskForge Verifier: FAILURE (Reward: 0) ===

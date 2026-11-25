@@ -1,0 +1,9 @@
+{
+  "task_id": "click-command-aliases",
+  "agent": "noop",
+  "score": 0.0,
+  "expected": 0.0,
+  "passed": false,
+  "duration_sec": 0.6,
+  "test_output": "FFFFF                                                                    [100%]\n=================================== FAILURES ===================================\n__________________________ test_command_aliases_basic __________________________\n\n    def test_command_aliases_basic():\n        runner = CliRunner()\n    \n        @click.group()\n        def cli():\n            pass\n    \n>       @cli.command(\"checkout\", aliases=[\"co\"])\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_feature.py:11: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nsrc/click/core.py:1894: in decorator\n    cmd: Command = command(*args, **kwargs)(f)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nf"
+}

@@ -1,0 +1,36 @@
+schema_version = "1.4"
+
+[task]
+name = "taskforge/click-command-aliases"
+[[task.authors]]
+name = "TaskForge Pipeline"
+email = "taskforge@innodata.ai"
+
+[metadata]
+repo_identifier = "pallets/click"
+repo_url = "https://github.com/pallets/click.git"
+base_commit = "934813e4d421071a1b3db3973c02fe2721359a6e"
+license = "BSD-3-Clause"
+harbor_version = "0.25.0"
+feature_type = "CLI option"
+difficulty = "medium"
+seed = 42
+generator_version = "1.0.0"
+provider = "offline"
+model = "template"
+summary = "Add aliases support to Click Command and Group classes. Commands accept an optional aliases list/tuple allowing commands to be looked up and invoked by primary name or any registered alias, while keeping list_commands clean."
+
+[verifier]
+timeout_sec = 120.0
+user = "root"
+environment_mode = "shared"
+network_mode = "no-network"
+
+[agent]
+timeout_sec = 300.0
+user = "root"
+
+[environment]
+cpus = 1
+memory_mb = 2048
+storage_mb = 4096

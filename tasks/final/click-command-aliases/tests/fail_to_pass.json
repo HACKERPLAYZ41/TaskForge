@@ -1,0 +1,7 @@
+[
+  "tests/test_feature.py::test_command_aliases_basic",
+  "tests/test_feature.py::test_command_multiple_aliases",
+  "tests/test_feature.py::test_subgroup_aliases",
+  "tests/test_feature.py::test_aliases_not_duplicated_in_list_commands",
+  "tests/test_feature.py::test_unknown_alias_error"
+]
